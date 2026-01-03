@@ -6,7 +6,7 @@ This Assignment are made by :
 This Assignment are made to highlighting object of particular interest
 - we made 4 difference image for this technique
 - Python coding are submitted in file:
-  1. Cat 1 highlight
-  2. Cat 2 highlight
-  3. Butterfly Highlight
-  4. Rabbit Highlight
+  1. Cat 1 image 
+  2. Cat 2 image
+  3. Butterfly image
+  4. Rabbit image
