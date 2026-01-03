@@ -1,0 +1,72 @@
+#2nd cat
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+from scipy.ndimage import binary_opening, binary_dilation
+
+# 1. File Configuration
+image_path = r"C:\Users\Asus\Downloads\cat no2.jpeg"
+
+try:
+    # 2. Load the image
+    img = Image.open(image_path)
+    img_array = np.array(img)
+
+    # 3. Separate Channels
+    # Converting to int16 prevents errors when subtracting values later
+    red = img_array[:, :, 0].astype(np.int16)
+    green = img_array[:, :, 1].astype(np.int16)
+    blue = img_array[:, :, 2].astype(np.int16)
+
+    # 4. Create the Segmentation Mask
+    # LOGIC EXPLANATION:
+    # ------------------
+    # A. CAT (Orange) vs LEAVES (Green):
+    #    Orange has more Red than Green. Leaves have more Green than Red.
+    #    Condition: Red > Green
+    
+    # B. CAT (Orange) vs FLOWERS (Purple):
+    #    Orange is (High Red + Medium Green). Purple is (High Red + High Blue).
+    #    The Cat has significantly more Green than Blue.
+    #    The Flowers have more Blue than Green.
+    #    Condition: Green > Blue
+    
+    # Combine conditions:
+    mask = (red > green) & (green > blue)
+
+    # 5. Clean up the Mask (Morphology)
+    # Removing small specks of noise (false positives)
+    # We define a structure (kernel) size. 5x5 is good for small noise.
+    structure = np.ones((20, 20))
+    
+    # "Opening" removes small white noise dots
+    clean_mask = binary_opening(mask, structure=structure)
+    
+    # Optional: "Dilation" slightly grows the mask to ensure we capture the cat's whiskers/edges
+    # You can comment this out if the cat looks too "bloated"
+    clean_mask = binary_dilation(clean_mask, structure=np.ones((3,3)))
+
+    # 6. Apply Mask to Image
+    segmented_cat = np.zeros_like(img_array)
+    segmented_cat[clean_mask] = img_array[clean_mask]
+
+    # 7. Display
+    plt.figure(figsize=(10, 5))
+
+    plt.subplot(1, 2, 1)
+    plt.title("Original Image")
+    plt.imshow(img_array)
+    plt.axis('off')
+
+    plt.subplot(1, 2, 2)
+    plt.title("Segmented Cat (Orange Logic)")
+    plt.imshow(segmented_cat)
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+except FileNotFoundError:
+    print(f"Error: The file was not found at {image_path}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
