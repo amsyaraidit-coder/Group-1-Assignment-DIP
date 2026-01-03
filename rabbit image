@@ -1,0 +1,78 @@
+#rabbit
+
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+from scipy.ndimage import binary_opening, binary_dilation
+
+# 1. File Configuration
+# Replace with the actual path to your image
+image_path = r"C:\Users\Asus\Downloads\rabbit.jpeg"
+
+try:
+    # 2. Load the image
+    img = Image.open(image_path)
+    img_array = np.array(img)
+
+    # 3. Separate Channels
+    # Converting to int16 prevents errors when subtracting values later
+    red = img_array[:, :, 0].astype(np.int16)
+    green = img_array[:, :, 1].astype(np.int16)
+    blue = img_array[:, :, 2].astype(np.int16)
+
+    # 4. Create the Segmentation Mask
+    # LOGIC EXPLANATION:
+    # ------------------
+    # A. White Fur:
+    #    White is defined by high values in all three channels (R, G, B).
+    #    We use a threshold of 160 to capture the white fur.
+    is_white = (red > 160) & (green > 160) & (blue > 160)
+
+    # B. Pink Flower and Grey Ears:
+    #    Pink is High Red + Medium Green + Low Blue.
+    #    The grey parts of the ears are also not purely white.
+    #    This condition captures the pink flower and the darker parts of the ears.
+    is_pinkish = (red > green) & (green > blue) & (red > 100)
+    
+    # Combine conditions: The rabbit is either white OR pinkish.
+    initial_mask = is_white | is_pinkish
+
+    # 5. Clean up the Mask (Morphology)
+    # The initial mask includes the scattered flowers. We need to remove them.
+    
+    # A. Binary Opening: Erosion followed by Dilation.
+    # This removes small objects (scattered flowers) while preserving larger ones.
+    # We use a large kernel (15x15) to ensure the scattered flowers are removed.
+    opening_kernel = np.ones((15, 15))
+    clean_mask = binary_opening(initial_mask, structure=opening_kernel)
+    
+    # B. Binary Dilation: Expands the mask slightly.
+    # The opening operation might have eroded the edges of the rabbit.
+    # Dilation with a smaller kernel (5x5) restores the object's boundary.
+    dilation_kernel = np.ones((5, 5))
+    final_mask = binary_dilation(clean_mask, structure=dilation_kernel)
+
+    # 6. Apply Mask to Image
+    segmented_rabbit = np.zeros_like(img_array)
+    segmented_rabbit[final_mask] = img_array[final_mask]
+
+    # 7. Display
+    plt.figure(figsize=(10, 5))
+
+    plt.subplot(1, 2, 1)
+    plt.title("Original Image")
+    plt.imshow(img_array)
+    plt.axis('off')
+
+    plt.subplot(1, 2, 2)
+    plt.title("Segmented Rabbit")
+    plt.imshow(segmented_rabbit)
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+except FileNotFoundError:
+    print(f"Error: The file was not found at {image_path}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
