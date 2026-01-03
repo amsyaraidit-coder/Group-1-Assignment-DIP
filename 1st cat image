@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
-# We use scipy.ndimage for basic morphology, which is standard in Spyder/Anaconda
+#use scipy.ndimage for basic morphology, 
 from scipy.ndimage import binary_opening
 
 # --- 1. Setup & Loading ---
