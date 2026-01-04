@@ -29,9 +29,10 @@ Case 1: The Camouflage Challenge (Cat1 & butterfly)
 **Challenge:** Segmenting a white/orange cat from a background containing white daisies (color overlap). And also the butterfly and the folwer is really hard to seperate the colour because of each of them has red high colour.
 <p float="left">
   <img src="Butterfly image" width="45%" /> 
+  <img src=" cat 1 image" width="45%" /> 
 </p>
 
-  Case 2: Multi-Color Object (Rabbit)
+  Case 2: Multi-Color Object (Rabbit & cat 2)
 **Challenge:** Segmenting a multi-colored object (White/Pink) while ignoring similar colored noise (pink flowers on the ground).
 <p float="left">
   <img src="path/to/rabbit_segmented.png" width="45%" /> 
@@ -40,7 +41,7 @@ Case 1: The Camouflage Challenge (Cat1 & butterfly)
 Case 3: Color Logic (Butterfly)
 **Challenge:** Distinguishing an Orange butterfly from a Deep Red flower using channel ratios.
 <p float="left">
-  <img src="path/to/butterfly_segmented.png" width="45%" /> 
+  <img src="Butterfly image" width="45%" /> 
 </p>
 
 ### What the Results Tell Us
