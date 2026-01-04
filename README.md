@@ -41,7 +41,7 @@ Case 1: The Camouflage Challenge (Cat1 & butterfly)
 Case 3: Color Logic (Butterfly)
 **Challenge:** Distinguishing an Orange butterfly from a Deep Red flower using channel ratios.
 <p float="left">
-  <img src="Butterfly image" width="45%" /> 
+  <img src="rabbit image" width="45%" /> 
 </p>
 
 ### What the Results Tell Us
