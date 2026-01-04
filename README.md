@@ -28,7 +28,7 @@ We chose to solve these specific segmentation cases using **low-level matrix man
 Case 1: The Camouflage Challenge (Cat1 & butterfly) 
 **Challenge:** Segmenting a white/orange cat from a background containing white daisies (color overlap). And also the butterfly and the folwer is really hard to seperate the colour because of each of them has red high colour.
 <p float="left">
-  <img src="[path/to/cat_segmented.png](https://github.com/amsyaraidit-coder/Group-1-Assignment-DIP/blob/main/Butterfly%20image)" width="45%" /> 
+  <img src="Butterfly image" width="45%" /> 
 </p>
 
   Case 2: Multi-Color Object (Rabbit)
