@@ -25,7 +25,7 @@ We chose to solve these specific segmentation cases using **low-level matrix man
 * **Educational Value:** This approach forced us to understand *how* digital images work at the pixel level (RGB channels as 3D matrices).
 * **The "Camouflage" Problem:** Standard color filters often fail when the foreground and background share colors (e.g., the white cat vs. white flowers). We selected these images specifically to demonstrate how **Morphological Operations** (Opening/Dilation) can filter objects by *size* and *structure* when color information is insufficient.
 
-  Case 1: The Camouflage Challenge (Cat1 & butterfly) 
+Case 1: The Camouflage Challenge (Cat1 & butterfly) 
 **Challenge:** Segmenting a white/orange cat from a background containing white daisies (color overlap). And also the butterfly and the folwer is really hard to seperate the colour because of each of them has red high colour.
 <p float="left">
   <img src="path/to/cat_segmented.png" width="45%" /> 
