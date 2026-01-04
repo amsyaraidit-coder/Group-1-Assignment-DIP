@@ -35,7 +35,7 @@ Case 1: The Camouflage Challenge (Cat1 & butterfly)
   Case 2: Multi-Color Object (Rabbit & cat 2)
 **Challenge:** Segmenting a multi-colored object (White/Pink) while ignoring similar colored noise (pink flowers on the ground).
 <p float="left">
-  <img src="path/to/rabbit_segmented.png" width="45%" /> 
+  <img src="cat2 image" width="45%" /> 
 </p>
 
 Case 3: Color Logic (Butterfly)
